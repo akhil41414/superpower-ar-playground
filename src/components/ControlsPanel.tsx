@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
   Camera,
   CameraOff,
@@ -87,12 +88,29 @@ export function ControlsPanel({
   experienceMode,
   onExperienceModeChange,
 }: ControlsPanelProps) {
+  const [isMinimized, setIsMinimized] = useState(false);
+
   // Formats seconds into MM:SS
   const formatTime = (secs: number) => {
     const m = Math.floor(secs / 60).toString().padStart(2, '0');
     const s = (secs % 60).toString().padStart(2, '0');
     return `${m}:${s}`;
   };
+
+  if (isMinimized) {
+    return (
+      <div className="flex justify-end w-full">
+        <button
+          onClick={() => setIsMinimized(false)}
+          className="p-3 bg-black/85 border border-white/10 rounded-2xl text-cyan-400 hover:text-cyan-300 transition-all shadow-glass backdrop-blur-md cursor-pointer flex items-center gap-1.5 font-mono text-xs uppercase font-extrabold"
+          title="Open Dashboard"
+        >
+          <Sliders className="w-4 h-4 text-cyan-400 animate-pulse" />
+          Controls
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div className="w-full max-w-sm glass-panel rounded-3xl overflow-hidden shadow-glass border border-white/10 flex flex-col max-h-[85vh] md:max-h-[90vh]">
@@ -104,14 +122,24 @@ export function ControlsPanel({
             Control Dashboard
           </span>
         </div>
-        <button
-          onClick={onShowTutorial}
-          className="p-1.5 rounded-lg bg-white/5 border border-white/10 text-gray-400 hover:text-cyan-400 transition-all hover:scale-105"
-          title="Open Onboarding Tutorial"
-        >
-          <HelpCircle className="w-4 h-4" />
-        </button>
+        <div className="flex items-center gap-1.5">
+          <button
+            onClick={onShowTutorial}
+            className="p-1.5 rounded-lg bg-white/5 border border-white/10 text-gray-400 hover:text-cyan-400 transition-all hover:scale-105 cursor-pointer"
+            title="Open Onboarding Tutorial"
+          >
+            <HelpCircle className="w-4 h-4" />
+          </button>
+          <button
+            onClick={() => setIsMinimized(true)}
+            className="p-1.5 rounded-lg bg-white/5 border border-white/10 text-gray-400 hover:text-cyan-400 transition-all hover:scale-105 cursor-pointer"
+            title="Minimize Dashboard"
+          >
+            <EyeOff className="w-4 h-4" />
+          </button>
+        </div>
       </div>
+
 
       {/* Scrollable controls */}
       <div className="p-5 overflow-y-auto flex flex-col gap-6 scrollbar-thin">

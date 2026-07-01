@@ -24,10 +24,11 @@ export function DeveloperStats({
     return (
       <button
         onClick={() => setIsVisible(true)}
-        className="fixed bottom-4 left-4 z-40 p-2 bg-black/60 border border-white/10 rounded-xl text-gray-400 hover:text-gray-200 transition-all shadow-md backdrop-blur-md"
+        className="fixed bottom-4 left-4 z-40 p-3 bg-black/75 border border-white/10 rounded-2xl text-cyan-400 hover:text-cyan-300 transition-all shadow-glass backdrop-blur-md cursor-pointer flex items-center gap-1.5 font-mono text-xs uppercase font-extrabold"
         title="Show Stats Panel"
       >
-        <Eye className="w-4 h-4" />
+        <Eye className="w-4 h-4 text-cyan-400 animate-pulse" />
+        HUD
       </button>
     );
   }
@@ -41,10 +42,10 @@ export function DeveloperStats({
         </span>
         <button
           onClick={() => setIsVisible(false)}
-          className="text-gray-500 hover:text-gray-300 transition-all"
+          className="p-2 hover:bg-white/5 rounded-lg -m-2 text-gray-500 hover:text-gray-300 transition-all cursor-pointer"
           title="Minimize Panel"
         >
-          <EyeOff className="w-3.5 h-3.5" />
+          <EyeOff className="w-4 h-4" />
         </button>
       </div>
 
